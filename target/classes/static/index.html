@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function login(){
+        var username = $('#nameInput').val();
+        var password = $('#passwordInput').val();
+        console.log('login name is '+ username)
+        console.log('login password is '+password)
+
+             $.ajax({
+                type:"POST",
+                url:"/register",
+                dataType:"json",
+                data:{
+                    username:username,
+                    password:password,
+                },
+                success:function(data){
+                  alert("注册成功");
+                  alert(data.status);
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+            }
+
+
+
+
+        function select() {
+             var usernameTemp = $('#nameInputForSelect').val();
+             console.log('login name is ' + usernameTemp)
+
+                  $.ajax({
+                      type:"GET",
+                      url:"/select",
+                      dataType:"json",
+                      data:{
+                          username:usernameTemp,
+                       },
+                      success:function(data){
+                         alert(data);
+                      },
+                      error: function(jqXHR){
+                      alert("发生错误："+jqXHR.status);
+                      }
+                  });
+            }
+
+        function dede() {
+             var usernameTemp = $('#nameInputForDelete').val();
+             console.log('login name is ' + usernameTemp)
+
+                  $.ajax({
+                      type:"DELETE",
+                      url:"/delete",
+                      dataType:"json",
+                      data:{
+                          username:usernameTemp,
+                       },
+                      success:function(data){
+                         alert(data);
+                      },
+                      error: function(jqXHR){
+                      alert("发生错误："+jqXHR.status);
+                      }
+                  });
+            }
+
+        function update(){
+        var username = $('#nameByUpdate').val();
+        var password=$('#newPassword').val();
+        console.log('login name is '+ username)
+        console.log('update password is '+ password)
+             $.ajax({
+                type:"POST",
+                url:"/update",
+                dataType:"json",
+                data:{
+                    username:username,
+                    password:password,
+                },
+                success:function(data){
+                  if(data.status){
+                      alert("修改成功");
+                         console.log('ok');
+                  }else{
+                      alert("修改失败");
+                         console.log('fail');
+                  }
+                },
+                error: function(jqXHR){
+                    alert("发生错误："+jqXHR.status);
+                }
+            });
+            }
+
+
+    </script>
+
+
+</head>
+<body>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+
+username:<input id="nameInput">
+password:<input id="passwordInput">
+<button onclick="login()">注册</button>
+<br>
+
+usernameTemp:<input id="nameInputForSelect">
+<button onclick="select()">查询</button>
+<br>
+usernameTemp:<input id="nameInputForDelete">
+<button onclick="dede()">删除该用户</button>
+<br>
+
+username:<input id="nameByUpdate">
+password:<input id="newPassword">
+<button onclick="update()">修改</button>
+</body>
+</html>
