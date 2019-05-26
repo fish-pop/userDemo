@@ -9,7 +9,7 @@ public class BaseEntity {
 
     private int id;
     private Date createTime;
-    private int craeteUserId;
+    private int createUserId;
     private Date updateTime;
     private int updateUserId;
     private int deleteFlag;
